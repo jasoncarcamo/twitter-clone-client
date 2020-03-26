@@ -1,6 +1,6 @@
 import React from "react";
 import "./Login.css";
-import { Redirect } from "react-router-dom";
+import UserToken from "../../Services/UserToken/UserToken";
 
 export default class Login extends React.Component{
     constructor(props){
@@ -41,6 +41,7 @@ export default class Login extends React.Component{
             })
             .then( resData => {
                 console.log(resData);
+                UserToken.saveToken(resData.token);
             })
             .catch( err => this.setState({ error: err.error}));
     }

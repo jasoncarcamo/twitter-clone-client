@@ -1,5 +1,6 @@
 import React from "react";
 import "./Register.css";
+import UserToken from "../../Services/UserToken/UserToken";
 
 export default class Register extends React.Component{
     constructor(props){
@@ -47,6 +48,7 @@ export default class Register extends React.Component{
             })
             .then( resData => {
                 console.log(resData);
+                UserToken.saveToken(resData.token);
             })
             .catch( err => this.setState({ error: err.error}));
     }
