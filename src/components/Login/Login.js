@@ -40,7 +40,6 @@ export default class Login extends React.Component{
                 return res.json();
             })
             .then( resData => {
-                console.log(resData);
                 UserToken.saveToken(resData.token);
             })
             .catch( err => this.setState({ error: err.error}));
