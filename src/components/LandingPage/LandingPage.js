@@ -12,15 +12,30 @@ export default class LandingPage extends React.Component{
         };
     }; 
 
+    componentDidMount(){
+        if(UserToken.hasToken()){
+            this.props.history.push("/home");
+        };
+    }
+
+    toLogin = ()=>{
+        this.props.history.push("/login");
+    }
+
+    toSignUp = ()=>{
+        this.props.history.push("/register");
+    }
+
     handleInput = (e)=>{
         this.setState({
             [e.target.name]: e.target.value
         });
     };
+
     handleForm = (e)=>{
         e.preventDefault();
 
-        fetch("https://quiet-fjord-72381.herokuapp.com/api/login", {
+        fetch("https://twitterclonecs20200402030233.azurewebsites.net/api/login", {
             method: "POST",
             headers: {
                 'content-type': "application/json"
@@ -39,6 +54,7 @@ export default class LandingPage extends React.Component{
             })
             .then( resData => {
                 UserToken.saveToken(resData.token);
+                this.props.history.push("/home");
             })
             .catch( err => this.setState({ error: err.error}));
     }
@@ -86,8 +102,8 @@ export default class LandingPage extends React.Component{
 
                         <section>
                             <p>Join the twiiter world</p>
-                            <button>Sign up</button>
-                            <button>Log in</button>
+                            <button onClick={this.toLogin}>Sign up</button>
+                            <button onClick={this.toSignUp}>Log in</button>
                         </section>
 
                     </section>

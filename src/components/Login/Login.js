@@ -1,6 +1,7 @@
 import React from "react";
 import "./Login.css";
 import UserToken from "../../Services/UserToken/UserToken";
+import UserContext from "../Contexts/UserContext/UserContex";
 
 export default class Login extends React.Component{
     constructor(props){
@@ -12,6 +13,8 @@ export default class Login extends React.Component{
         };
     };
 
+    static contextType = UserContext;
+
     handleInput = (e)=>{
         this.setState({
             [e.target.name]: e.target.value
@@ -21,7 +24,7 @@ export default class Login extends React.Component{
     handleForm = (e)=>{
         e.preventDefault();
 
-        fetch("https://quiet-fjord-72381.herokuapp.com/api/login", {
+        fetch("https://twitterclonecs20200402030233.azurewebsites.net/api/login", {
             method: "POST",
             headers: {
                 'content-type': "application/json"
@@ -41,6 +44,7 @@ export default class Login extends React.Component{
             })
             .then( resData => {
                 UserToken.saveToken(resData.token);
+                this.props.history.push("/home");
             })
             .catch( err => this.setState({ error: err.error}));
     }

@@ -25,7 +25,7 @@ export default class Register extends React.Component{
     handleForm = (e)=>{
         e.preventDefault();
 
-        fetch("https://quiet-fjord-72381.herokuapp.com/api/register", {
+        fetch("https://twitterclonecs20200402030233.azurewebsites.net/api/register", {
             method: "POST",
             headers: {
                 'content-type': "application/json"
@@ -48,6 +48,7 @@ export default class Register extends React.Component{
             })
             .then( resData => {
                 UserToken.saveToken(resData.token);
+                this.props.history.push("/home");
             })
             .catch( err => this.setState({ error: err.error}));
     }

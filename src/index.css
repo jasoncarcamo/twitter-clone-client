@@ -26,6 +26,8 @@ code {
 
 #root{
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 @media screen and (max-width: 770px){
